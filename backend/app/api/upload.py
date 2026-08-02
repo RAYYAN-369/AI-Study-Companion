@@ -1,4 +1,5 @@
 from fastapi import APIRouter, UploadFile, File
+from app.services.parser import extract_text
 import os
 
 router = APIRouter()
@@ -16,7 +17,10 @@ async def upload_file(file: UploadFile = File(...)):
     with open(file_path, "wb") as f:
         f.write(await file.read())
 
+    text = extract_text(file_path)
+
     return {
         "filename": file.filename,
-        "message": "File uploaded successfully"
+        "characters": len(text),
+        "text": text
     }
