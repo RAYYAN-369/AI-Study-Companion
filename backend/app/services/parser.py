@@ -2,10 +2,6 @@ from pypdf import PdfReader
 
 
 def extract_pdf(file_path: str) -> str:
-    """
-    Extract text from a PDF file.
-    """
-
     text = ""
 
     reader = PdfReader(file_path)
@@ -20,19 +16,11 @@ def extract_pdf(file_path: str) -> str:
 
 
 def extract_txt(file_path: str) -> str:
-    """
-    Extract text from a TXT file.
-    """
-
     with open(file_path, "r", encoding="utf-8") as file:
         return file.read()
 
 
 def extract_text(file_path: str):
-    """
-    Detect file type and extract text.
-    """
-
     if file_path.endswith(".pdf"):
         return extract_pdf(file_path)
 
