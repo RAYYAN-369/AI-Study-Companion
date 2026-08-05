@@ -4,3 +4,8 @@ google-genai
 fastapi
 uvicorn
 pydantic
+fastapi
+uvicorn
+python-multipart
+pypdf
+python-docx
