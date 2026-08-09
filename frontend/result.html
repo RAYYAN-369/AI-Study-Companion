@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Study Plan — AI Study Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 0 1 2-2h11a1 1 0 0 1 1 1v14.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span class="brand-name">Study Companion</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#about">About</a>
+      <a href="upload.html" class="btn btn-primary nav-cta" style="padding:10px 20px;font-size:14.5px;">New plan</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open-mobile')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#0E2A47" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main class="section-tight">
+  <div class="container">
+    <span class="eyebrow">Study plan</span>
+
+    <div class="score-hero card">
+      <div class="score-copy">
+        <span class="score-label">Generated from <span id="sourceFileName">your document</span></span>
+        <h1 id="topicHeadline">Your study plan</h1>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-card card">
+        <span class="stat-label">Chunks retrieved</span>
+        <span class="stat-value" id="chunksRetrieved">—</span>
+      </div>
+      <div class="stat-card card">
+        <span class="stat-label">Study days planned</span>
+        <span class="stat-value" id="dayCount">—</span>
+      </div>
+      <div class="stat-card card">
+        <span class="stat-label">Est. total study time</span>
+        <span class="stat-value" id="studyTime">—</span>
+      </div>
+    </div>
+
+    <div class="card summary-card">
+      <h2 class="block-title">AI summary</h2>
+      <p id="aiSummary" class="summary-text"></p>
+    </div>
+
+    <div class="card schedule-card">
+      <h2 class="block-title">Suggested schedule</h2>
+      <p class="block-sub">Day-by-day plan generated from the retrieved context.</p>
+      <div id="scheduleList" class="schedule-list"></div>
+    </div>
+
+    <div class="card sources-card">
+      <h2 class="block-title">Retrieved from your document</h2>
+      <p class="block-sub">The passages the plan above was grounded in.</p>
+      <div id="sourcesList" class="sources-list"></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="btn btn-primary" id="downloadBtn">Download plan</button>
+      <a href="upload.html" class="btn btn-secondary">Start a new plan</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="brand" style="margin-bottom:12px;">
+        <span class="brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 0 1 2-2h11a1 1 0 0 1 1 1v14.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="brand-name" style="font-size:17px;">Study Companion</span>
+      </div>
+      <p>AI-assisted notes-to-study-plan pipeline, built for the AI / GenAI Fellowship Program.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="index.html#features">Features</a>
+      <a href="upload.html">Upload notes</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="https://github.com/RAYYAN-369/AI-Study-Companion" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="index.html#about">About</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 AI Study Companion — v0.1.0 (MVP) · AI / GenAI Fellowship Program</div>
+</footer>
+
+<style>
+  .score-hero {
+    display: flex; align-items: center; gap: 32px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #fff;
+    padding: 32px;
+    margin: 16px 0 24px;
+  }
+  .score-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.85; }
+  .score-copy h1 { color: #fff; font-size: clamp(20px, 2.6vw, 27px); margin: 8px 0 4px; }
+
+  .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+  .stat-card { padding: 18px 20px; }
+  .stat-label { display: block; font-size: 12.5px; color: var(--muted); margin-bottom: 8px; }
+  .stat-value { font-family: var(--font-display); font-size: 26px; font-weight: 700; color: var(--ink); }
+
+  .block-title { font-size: 18px; margin-bottom: 6px; }
+  .block-sub { font-size: 13.5px; color: var(--muted); margin-bottom: 16px; }
+
+  .summary-card { padding: 26px; margin-bottom: 24px; }
+  .summary-text { font-size: 15.5px; color: var(--ink-soft); line-height: 1.7; margin-top: 10px; }
+
+  .schedule-card { padding: 26px; margin-bottom: 24px; }
+  .schedule-list { margin-top: 8px; }
+  .schedule-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .schedule-row:last-child { border-bottom: none; }
+  .sched-order {
+    font-family: var(--font-mono); font-size: 12px; color: var(--primary-dark);
+    background: var(--primary-soft); width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .sched-body { flex: 1; }
+  .sched-topic { font-weight: 600; font-size: 14.5px; margin-bottom: 6px; }
+  .sched-tasks { margin: 0; padding-left: 18px; font-size: 13.5px; color: var(--ink-soft); }
+  .sched-tasks li { margin-bottom: 4px; }
+  .sched-time { font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft); white-space: nowrap; }
+
+  .sources-card { padding: 26px; margin-bottom: 28px; }
+  .sources-list { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+  .source-item {
+    font-size: 13.5px; color: var(--ink-soft);
+    background: var(--surface-alt); border-left: 3px solid var(--accent);
+    padding: 10px 14px; border-radius: 0 8px 8px 0;
+  }
+  .source-item .src-tag { font-family: var(--font-mono); font-size: 11px; color: var(--muted); display: block; margin-bottom: 4px; }
+
+  .result-actions { display: flex; gap: 14px; padding-bottom: 40px; flex-wrap: wrap; }
+
+  @media (max-width: 860px) {
+    .stat-row { grid-template-columns: repeat(2, 1fr); }
+    .score-hero { flex-direction: column; text-align: center; padding: 28px 20px; }
+  }
+  @media (max-width: 620px) {
+    .nav-links.open-mobile {
+      display: flex; position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--surface); flex-direction: column; padding: 12px 20px 20px;
+      border-bottom: 1px solid var(--border-soft); box-shadow: var(--shadow-md);
+    }
+    .nav-links.open-mobile a { width: 100%; }
+  }
+</style>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

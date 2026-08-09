@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Uploaded documents (contains user data, don't commit)
+backend/uploads/*
+!backend/uploads/.gitkeep

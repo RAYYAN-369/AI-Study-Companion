@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Study Companion — Turn notes into a study plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 0 1 2-2h11a1 1 0 0 1 1 1v14.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 19a2 2 0 0 0 2 2h11.5a.5.5 0 0 0 .5-.5V19H6a2 2 0 0 0-2 2Z" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 7h7M8 10.5h5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </span>
+      <span class="brand-name">Study Companion</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#about">About</a>
+      <a href="upload.html" class="btn btn-primary nav-cta" style="padding:10px 20px;font-size:14.5px;">Try it</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open-mobile')">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#0E2A47" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero grid-texture">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow">Upload → Chunk → Embed → Retrieve → Plan</span>
+      <h1 class="hero-title">
+        Turn scattered notes into a <span class="hl">study plan</span> that actually fits the exam.
+      </h1>
+      <p class="hero-sub">
+        Drop in your syllabus or lecture notes. A retrieval-augmented pipeline reads them, finds what
+        matters for the topic you name, and hands back a structured, source-grounded plan — not a
+        generic outline.
+      </p>
+      <div class="hero-actions">
+        <a href="upload.html" class="btn btn-primary">Upload your notes</a>
+        <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
+      </div>
+      <div class="hero-trust">
+        <span>Built on a real RAG pipeline</span>
+        <span class="dot">·</span>
+        <span>Vector search with Qdrant</span>
+        <span class="dot">·</span>
+        <span>Retrieval is scoped to your upload</span>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="stack-card card">
+        <div class="stack-card-head">
+          <span class="page-dot" style="background:#FF8A8A"></span>
+          <span class="page-dot" style="background:#FFC94D"></span>
+          <span class="page-dot" style="background:#5FD4A3"></span>
+          <span class="stack-card-title">week3_notes.pdf</span>
+        </div>
+        <div class="stack-card-body">
+          <div class="fake-line w-90"></div>
+          <div class="fake-line w-70"></div>
+          <div class="fake-line w-80"></div>
+          <div class="chunk-row">
+            <span class="chunk-pill">chunk 01</span>
+            <span class="chunk-pill">chunk 02</span>
+            <span class="chunk-pill">chunk 03</span>
+          </div>
+          <div class="fake-line w-60"></div>
+          <div class="vector-tag">↳ embedded → <b>qdrant</b></div>
+        </div>
+      </div>
+      <div class="stack-card card floaty">
+        <div class="plan-mini-title">Study Plan · Cellular Respiration</div>
+        <div class="plan-mini-row"><span class="check">✓</span> Glycolysis — 40 min</div>
+        <div class="plan-mini-row"><span class="check">✓</span> Krebs cycle — 55 min</div>
+        <div class="plan-mini-row muted"><span class="check">•</span> Electron transport — 45 min</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HOW IT WORKS — signature pipeline ============ -->
+<section class="section pipeline-section" id="how-it-works">
+  <div class="container">
+    <div class="section-head text-center">
+      <span class="eyebrow">The pipeline</span>
+      <h2 class="section-title">Five steps, one retrieval-augmented plan</h2>
+      <p class="section-sub">
+        Every study plan is grounded in what you actually uploaded — the model retrieves the relevant
+        chunks before it writes a single line of the plan.
+      </p>
+    </div>
+
+    <div class="pipeline">
+      <div class="pipeline-track" aria-hidden="true"></div>
+      <ol class="pipeline-steps">
+        <li class="pipeline-step" style="--d:0s">
+          <span class="pipeline-num">01</span>
+          <h3>Upload</h3>
+          <p>Notes or syllabus — PDF, TXT, or DOCX.</p>
+        </li>
+        <li class="pipeline-step" style="--d:0.6s">
+          <span class="pipeline-num">02</span>
+          <h3>Chunk</h3>
+          <p>Text is split into overlapping, retrievable passages.</p>
+        </li>
+        <li class="pipeline-step" style="--d:1.2s">
+          <span class="pipeline-num">03</span>
+          <h3>Embed &amp; store</h3>
+          <p>Each chunk becomes a vector, stored in Qdrant.</p>
+        </li>
+        <li class="pipeline-step" style="--d:1.8s">
+          <span class="pipeline-num">04</span>
+          <h3>Retrieve</h3>
+          <p>Your topic pulls back the most relevant passages.</p>
+        </li>
+        <li class="pipeline-step" style="--d:2.4s">
+          <span class="pipeline-num">05</span>
+          <h3>Generate plan</h3>
+          <p>An LLM turns retrieved context into a structured plan.</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section class="section" id="features" style="background:var(--bg-soft);">
+  <div class="container">
+    <div class="section-head text-center">
+      <span class="eyebrow">What you get</span>
+      <h2 class="section-title">Feedback that reads your material, not just your topic</h2>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card card">
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 3v13m0 0-4-4m4 4 4-4M5 21h14" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Note &amp; syllabus upload</h3>
+        <p>Drag in a PDF, TXT, or DOCX file — parsed and cleaned before anything else happens.</p>
+      </div>
+      <div class="feature-card card">
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h10M4 18h7" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Smart chunking</h3>
+        <p>Long documents are split into overlapping passages sized for accurate retrieval.</p>
+      </div>
+      <div class="feature-card card">
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="var(--primary)" stroke-width="1.8"/><path d="M12 3v3M12 18v3M21 12h-3M6 12H3M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1M18.4 18.4l-2.1-2.1M7.7 7.7 5.6 5.6" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Vector search with Qdrant</h3>
+        <p>Every chunk is embedded and indexed, so retrieval finds meaning, not just keywords.</p>
+      </div>
+      <div class="feature-card card">
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.5.4.6.9.6 1.4v.3h6v-.3c0-.5.1-1 .6-1.4A6 6 0 0 0 12 3Z" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>Grounded study plan</h3>
+        <p>The plan cites which parts of your material back each recommendation.</p>
+      </div>
+      <div class="feature-card card">
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="var(--primary)" stroke-width="1.8"/><path d="M8 2v4M16 2v4M3 10h18" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <h3>Time-boxed schedule</h3>
+        <p>Topics are ordered and time-allocated, so you know what to study first.</p>
+      </div>
+      <div class="feature-card card">
+        <div class="feature-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2 2 7l10 5 10-5-10-5Z" stroke="var(--primary)" stroke-width="1.8" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="var(--primary)" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
+        <h3>Clean, focused display</h3>
+        <p>Results render in a distraction-free layout built for a study session, not a dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TECH STACK ============ -->
+<section class="section-tight">
+  <div class="container">
+    <div class="section-head text-center">
+      <span class="eyebrow">Under the hood</span>
+      <h2 class="section-title" style="font-size:28px;">Built on a real RAG stack</h2>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-item"><span class="stack-tag">Frontend</span><p>Next.js · React · Tailwind CSS</p></div>
+      <div class="stack-item"><span class="stack-tag">Backend</span><p>FastAPI · Python</p></div>
+      <div class="stack-item"><span class="stack-tag">AI</span><p>OpenAI / Gemini / Claude</p></div>
+      <div class="stack-item"><span class="stack-tag">Vector DB</span><p>Qdrant</p></div>
+      <div class="stack-item"><span class="stack-tag">Infra</span><p>Docker · Git · GitHub</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-box card">
+      <span class="eyebrow">About this project</span>
+      <p class="about-text">
+        Built as a Week 3 project for the AI / GenAI Fellowship Program. Study Companion is a
+        retrieval-augmented generation pipeline: your notes are chunked, embedded, and stored in
+        Qdrant, then retrieved against the topic you're studying to generate a structured plan.
+        It's guidance for a study session — not a replacement for reading the source material.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="brand" style="margin-bottom:12px;">
+        <span class="brand-mark"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 19V5a2 2 0 0 1 2-2h11a1 1 0 0 1 1 1v14.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="brand-name" style="font-size:17px;">Study Companion</span>
+      </div>
+      <p>AI-assisted notes-to-study-plan pipeline, built for the AI / GenAI Fellowship Program.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Product</h4>
+      <a href="index.html#features">Features</a>
+      <a href="upload.html">Upload notes</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="index.html#how-it-works">How it works</a>
+      <a href="https://github.com/RAYYAN-369/AI-Study-Companion" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="index.html#about">About</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 AI Study Companion — v0.1.0 (MVP) · AI / GenAI Fellowship Program</div>
+</footer>
+
+<style>
+  .hero { padding: 64px 0 40px; }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items: center;
+    padding-top: 24px;
+    padding-bottom: 48px;
+  }
+  .hero-title {
+    font-size: clamp(32px, 4.2vw, 52px);
+    line-height: 1.08;
+    margin: 18px 0 20px;
+  }
+  .hero-title .hl {
+    position: relative;
+    font-style: italic;
+    color: var(--primary-dark);
+  }
+  .hero-title .hl::after {
+    content: "";
+    position: absolute;
+    left: -3px; right: -3px; bottom: 2px;
+    height: 10px;
+    background: var(--accent-warm);
+    opacity: 0.55;
+    z-index: -1;
+    border-radius: 3px;
+  }
+  .hero-sub { font-size: 17.5px; color: var(--ink-soft); max-width: 52ch; margin-bottom: 30px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 26px; }
+  .hero-trust { display: flex; flex-wrap: wrap; gap: 8px; font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+  .hero-trust .dot { opacity: 0.5; }
+
+  .hero-visual { position: relative; min-height: 360px; }
+  .stack-card {
+    padding: 20px;
+    width: min(360px, 100%);
+  }
+  .stack-card-head { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; }
+  .page-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .stack-card-title { font-family: var(--font-mono); font-size: 12px; color: var(--muted); margin-left: 6px; }
+  .fake-line { height: 8px; border-radius: 4px; background: var(--border-soft); margin-bottom: 9px; }
+  .w-90 { width: 90%; } .w-80 { width: 80%; } .w-70 { width: 70%; } .w-60 { width: 60%; }
+  .chunk-row { display: flex; gap: 8px; margin: 14px 0 12px; flex-wrap: wrap; }
+  .chunk-pill {
+    font-family: var(--font-mono); font-size: 11px; color: var(--primary-dark);
+    background: var(--primary-soft); padding: 5px 10px; border-radius: 999px;
+  }
+  .vector-tag { font-family: var(--font-mono); font-size: 12px; color: var(--good); margin-top: 6px; }
+  .stack-card.floaty {
+    position: absolute;
+    bottom: -28px;
+    right: -8px;
+    width: 250px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow-lg);
+    animation: float 5s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+  .plan-mini-title { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .06em; }
+  .plan-mini-row { font-size: 13.5px; margin-bottom: 8px; display: flex; gap: 8px; }
+  .plan-mini-row .check { color: var(--good); font-weight: 700; }
+  .plan-mini-row.muted { color: var(--muted); }
+  .plan-mini-row.muted .check { color: var(--muted); }
+
+  .section-head { max-width: 640px; margin: 0 auto 48px; }
+  .section-title { font-size: clamp(26px, 3vw, 36px); margin: 12px 0 12px; }
+  .section-sub { color: var(--muted); font-size: 16px; }
+
+  .pipeline { position: relative; padding-top: 8px; }
+  .pipeline-track {
+    position: absolute;
+    top: 27px;
+    left: 6%;
+    right: 6%;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--border) 0 8px, transparent 8px 14px);
+  }
+  .pipeline-steps {
+    position: relative;
+    list-style: none;
+    margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+  .pipeline-step { text-align: center; padding: 0 8px; }
+  .pipeline-num {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--primary);
+    color: var(--primary-dark);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 0 0 6px var(--bg);
+    animation: pulse-step 3s ease-in-out infinite;
+    animation-delay: var(--d);
+  }
+  @keyframes pulse-step {
+    0%, 80%, 100% { box-shadow: 0 0 0 6px var(--bg); border-color: var(--primary); }
+    10% { box-shadow: 0 0 0 6px var(--bg), 0 0 0 10px var(--primary-soft); border-color: var(--accent); }
+  }
+  .pipeline-step h3 { font-size: 17px; margin-bottom: 6px; }
+  .pipeline-step p { font-size: 13.5px; color: var(--muted); }
+
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .feature-card { padding: 26px; }
+  .feature-icon {
+    width: 42px; height: 42px; border-radius: 11px;
+    background: var(--primary-soft);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .feature-card h3 { font-size: 17px; margin-bottom: 8px; }
+  .feature-card p { font-size: 14.5px; color: var(--muted); }
+
+  .stack-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .stack-item {
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    padding: 18px 16px;
+    background: var(--surface-alt);
+    text-align: center;
+  }
+  .stack-tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--primary-dark);
+    background: var(--primary-soft);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .stack-item p { font-size: 13.5px; color: var(--ink-soft); }
+
+  .about-box { padding: 40px; max-width: 860px; margin: 0 auto; }
+  .about-text { font-size: 16.5px; color: var(--ink-soft); margin-top: 14px; line-height: 1.7; }
+
+  @media (max-width: 980px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { min-height: 300px; margin-top: 12px; }
+    .stack-card.floaty { position: static; margin-top: 16px; width: 100%; animation: none; }
+    .pipeline-steps { grid-template-columns: repeat(3, 1fr); row-gap: 32px; }
+    .pipeline-track { display: none; }
+    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .stack-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 620px) {
+    .pipeline-steps { grid-template-columns: repeat(2, 1fr); }
+    .feature-grid { grid-template-columns: 1fr; }
+    .stack-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav-links.open-mobile {
+      display: flex; position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--surface); flex-direction: column; padding: 12px 20px 20px;
+      border-bottom: 1px solid var(--border-soft); box-shadow: var(--shadow-md);
+    }
+    .nav-links.open-mobile a { width: 100%; }
+  }
+</style>
+
+</body>
+</html>
